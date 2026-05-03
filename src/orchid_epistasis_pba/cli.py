@@ -7,7 +7,7 @@ from .pipeline import EpistasisRunConfig, run_epistasis_pipeline
 
 
 def build_parser() -> argparse.ArgumentParser:
-    p = argparse.ArgumentParser(prog="oracle-epistasis")
+    p = argparse.ArgumentParser(prog="orchid-epistasis-pba")
     p.add_argument("--input", required=True, type=Path)
     p.add_argument("--outdir", required=True, type=Path)
     p.add_argument("--variant-col", required=True,  help="The column of the dataset with the genotype of interest")

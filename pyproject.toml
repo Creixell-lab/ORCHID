@@ -3,9 +3,9 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "oracle-epistasis"
+name = "orchid-epistasis-pba"
 version = "0.1.0"
-description = "WT-independent epistasis calculations and linearisation pipeline using "
+description = "ORCHID epistasis pipeline using Partial Background Averaging (PBA) on Walsh-Hadamard transforms for WT-independent epistasis calculations"
 readme = "README.md"
 requires-python = ">=3.8"
 license = {text = "MIT"}
@@ -36,7 +36,7 @@ dependencies = [
 "Homepage" = "https://github.com/Creixell-lab/ORACLE"
 
 [project.scripts]
-oracle-epistasis = "oracle_epistasis.cli:main"
+orchid-epistasis-pba = "orchid_epistasis_pba.cli:main"
 
 [tool.setuptools]
 package-dir = {"" = "src"}

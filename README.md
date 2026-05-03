@@ -82,15 +82,15 @@ python -m pip install -e .
 ### 5. Verify installation
 
 ```bash
-oracle-epistasis --help
+orchid-epistasis-pba --help
 ```
 
 ### 6. Run Example
 
 ```bash
-oracle-epistasis \
+orchid-epistasis-pba \
   --input "example_files/210825_PIN1_36_library.csv" \
-  --outdir "./oracle_output" \
+  --outdir "./orchid_output" \
   --variant-col pep_encoded \
   --phenotype-col PD_input_mean \
   --n 6 --k 3 --max-order 3 \
@@ -120,6 +120,6 @@ The script generates two files in the specified output directory:
 
 ### Future Updates
 
- 1.  Incoporate data linearisation from the .ipynb into the python script, orchid-epistasis assumes data is linearised already
- 2.  orchid-epistasis relies on partial background averaging based on WH transform, have an alternate script that uses ridge regression with automatic alpha optimisation
+ 1.  Incoporate data linearisation from the .ipynb into the python script, `orchid-epistasis-pba` assumes data is linearised already
+ 2.  `orchid-epistasis-pba` relies on Partial Background Averaging (PBA) based on the WH transform; an alternate script that uses ridge regression with automatic alpha optimisation is planned
  3.  output should generate more data visualisations, images and r2 values seen in the .ipynb
