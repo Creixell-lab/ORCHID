@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="orchid_github_social_preview_1280x640.png" alt="ORCHID cover art" width="100%">
+</p>
+
 # ORCHID: ORigin-independent and Context-exHaustIve analysis of CDMS libraries
 
 This is the official repository of ORCHID for the paper:
