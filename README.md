@@ -1,6 +1,6 @@
-# ORACLE: ORigins and Context-independent Analysis of CDMS Libraries for Epistasis
+# ORCHID: ORigin-independent and Context-exHaustIve analysis of CDMS libraries
 
-This is the official repository of ORACLE for the paper:
+This is the official repository of ORCHID for the paper:
 Identifying Protein Superbinders and Molecular Determinants of Epistasis with Combinatorial Deep Mutational Scanning (CDMS) Libraries
 
 Mingxuan Jiang<sup>1</sup>, Mohan Sun<sup>1</sup>, Nuo Cheng<sup>1</sup>, Mihkel Örd<sup>1</sup>, Teresa L. Augustin<sup>1</sup>,  
@@ -32,15 +32,15 @@ https://colab.research.google.com/github/Creixell-lab/epystasis/blob/main/Epista
 This colab file allows an interactive parsing of the underlying logic and pipeline of the approach.
 
 
-ORACLE is a WT-agnostic, Walsh-Hadamard based framework that can treats phenotype-genotype datasets using a CDMS (combinatorial deep mutational scanning) approach with interpretable epistasis modelling to generate 1st order, 2nd order, 3rd order and higher order of epistasis coefficients. With this coefficients, we can quantify protein interaction landscapes and show interactions that can be explained with single mutations (1st order) and interactions that rely on cumulative, additive interactions of amino acids. Using these epistasis coefficients can also help to predict out of sample phenotypes for missing or unsampled variants, with high degrees of confidence with as sparse as 1% of the fitness landscape. This approach expands on the exisiting Walsh-Hadamard matrices, but are now configured to be wild-type free without need for referencing to a particular backround, and is able to analytically generate all mutational paths involved in a statistical epistasis calculation to explain the contributions leading to a wild-type independent epistasis coefficient value. 
+ORCHID is a WT-agnostic, Walsh-Hadamard based framework that can treats phenotype-genotype datasets using a CDMS (combinatorial deep mutational scanning) approach with interpretable epistasis modelling to generate 1st order, 2nd order, 3rd order and higher order of epistasis coefficients. With this coefficients, we can quantify protein interaction landscapes and show interactions that can be explained with single mutations (1st order) and interactions that rely on cumulative, additive interactions of amino acids. Using these epistasis coefficients can also help to predict out of sample phenotypes for missing or unsampled variants, with high degrees of confidence with as sparse as 1% of the fitness landscape. This approach expands on the exisiting Walsh-Hadamard matrices, but are now configured to be wild-type free without need for referencing to a particular backround, and is able to analytically generate all mutational paths involved in a statistical epistasis calculation to explain the contributions leading to a wild-type independent epistasis coefficient value. 
 
-## ORACLE Epistasis Code Installation & Usage Guide
+## ORCHID Epistasis Code Installation & Usage Guide
 
 
-ORACLE epistasis can also be run locally using the following pip installation guide
+ORCHID epistasis can also be run locally using the following pip installation guide
 
 # 
-This guide details how to install the ORACLE package locally for development and analysis.
+This guide details how to install the ORCHID package locally for development and analysis.
 
 ## Prerequisites
 * **Python >= 3.8+** 
@@ -51,8 +51,8 @@ This guide details how to install the ORACLE package locally for development and
 First, download the code to your local machine:
 
 ```bash
-git clone https://github.com/Creixell-lab/ORACLE.git
-cd ORACLE
+git clone https://github.com/Creixell-lab/ORCHID.git
+cd ORCHID
 ```
 
 ### 2. Create environment
@@ -97,7 +97,7 @@ oracle-epistasis \
 **Input Parameters:**
 
 * `--input`: Path to the input `.csv` file (can be tab or comma delimited). 
-* **Example:** [`example_files/210825_PIN1_36_library.csv`](https://github.com/Creixell-lab/ORACLE/blob/main/example_files/210825_PIN1_36_library.csv)
+* **Example:** [`example_files/210825_PIN1_36_library.csv`](https://github.com/Creixell-lab/ORCHID/blob/main/example_files/210825_PIN1_36_library.csv)
 * `--variant-col`: Column name containing the variant sequences (genotypes). These can be encoded or actual amino acids.
 * `--phenotype-col`: Column name containing the experimental or computational phenotype measurement.
 * `--n`: The length of the sequence (number of positions).
@@ -115,6 +115,6 @@ The script generates two files in the specified output directory:
 
 ### Future Updates
 
- 1.  Incoporate data linearisation from the .ipynb into the python script, oracle-epistasis assumes data is linearised already
- 2.  oracle-epistasis relies on partial background averaging based on WH transform, have an alternate script that uses ridge regression with automatic alpha optimisation
+ 1.  Incoporate data linearisation from the .ipynb into the python script, orchid-epistasis assumes data is linearised already
+ 2.  orchid-epistasis relies on partial background averaging based on WH transform, have an alternate script that uses ridge regression with automatic alpha optimisation
  3.  output should generate more data visualisations, images and r2 values seen in the .ipynb
