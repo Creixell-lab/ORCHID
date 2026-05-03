@@ -29,11 +29,12 @@ Code for WT independent Epistasis Calculations
 
 
 
-[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Creixell-lab/epystasis/blob/main/Epistasis_20250811.ipynb)
+[![Open example notebook in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Creixell-lab/ORCHID/blob/main/Epistasis_20250821_PIN136.ipynb)
 
-Google colab file is at:
-https://colab.research.google.com/github/Creixell-lab/epystasis/blob/main/Epistasis_20250811.ipynb
-This colab file allows an interactive parsing of the underlying logic and pipeline of the approach.
+Example notebook:  
+[`Epistasis_20250821_PIN136.ipynb`](https://github.com/Creixell-lab/ORCHID/blob/main/Epistasis_20250821_PIN136.ipynb)
+
+This notebook provides an interactive walkthrough of the ORCHID epistasis analysis pipeline, including phenotype processing, Walsh–Hadamard-based epistasis coefficient calculation, model interpretation, and example analysis of the PIN1 36-variant CDMS library.
 
 
 ORCHID is a WT-agnostic, Walsh-Hadamard based framework that can treats phenotype-genotype datasets using a CDMS (combinatorial deep mutational scanning) approach with interpretable epistasis modelling to generate 1st order, 2nd order, 3rd order and higher order of epistasis coefficients. With this coefficients, we can quantify protein interaction landscapes and show interactions that can be explained with single mutations (1st order) and interactions that rely on cumulative, additive interactions of amino acids. Using these epistasis coefficients can also help to predict out of sample phenotypes for missing or unsampled variants, with high degrees of confidence with as sparse as 1% of the fitness landscape. This approach expands on the exisiting Walsh-Hadamard matrices, but are now configured to be wild-type free without need for referencing to a particular backround, and is able to analytically generate all mutational paths involved in a statistical epistasis calculation to explain the contributions leading to a wild-type independent epistasis coefficient value. 
