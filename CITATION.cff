@@ -1,10 +1,10 @@
 cff-version: 1.2.0
 message: "If you use this software, please cite the paper listed in preferred-citation."
-title: "ORACLE: ORigins and Context-independent Analysis of CDMS Libraries for Epistasis"
+title: "ORCHID: ORigin-independent and Context-exHaustIve analysis of CDMS libraries"
 type: software
 license: MIT
-repository-code: "https://github.com/Creixell-lab/ORACLE"
-url: "https://github.com/Creixell-lab/ORACLE"
+repository-code: "https://github.com/Creixell-lab/ORCHID"
+url: "https://github.com/Creixell-lab/ORCHID"
 keywords:
   - epistasis
   - combinatorial deep mutational scanning
@@ -52,7 +52,7 @@ contact:
 preferred-citation:
   type: article
   title: "Identifying Protein Superbinders and Molecular Determinants of Epistasis with Combinatorial Deep Mutational Scanning (CDMS) Libraries"
-  status: in-preparation
+  status: in-review
   year: 2025
   authors:
     - family-names: Jiang
