@@ -18,6 +18,18 @@ from .model import (
 
 from .pipeline import run_epistasis_pipeline
 
+from .regression import (
+    V1_INV,
+    V_PHYS,
+    BenchmarkResult,
+    LoadedLibrary,
+    build_design_matrix,
+    load_example_library,
+    map_to_design,
+    plot_benchmark,
+    run_benchmark,
+)
+
 __all__ = [
     "read_library_csv",
     "add_position_columns",
@@ -29,4 +41,13 @@ __all__ = [
     "run_epistasis_pipeline",
     "learn_positionwise_map_strict",
     "decode_with_position_map",
+    "V_PHYS",
+    "V1_INV",
+    "BenchmarkResult",
+    "LoadedLibrary",
+    "load_example_library",
+    "build_design_matrix",
+    "map_to_design",
+    "run_benchmark",
+    "plot_benchmark",
 ]
