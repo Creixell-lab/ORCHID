@@ -46,6 +46,25 @@ from .cli_general_regression import (
     tilde_coefficient_orders,
 )
 
+from .linearisation import (
+    LINK_SPECS,
+    FitResult,
+    LinkSpec,
+    best_method,
+    fit_all_methods,
+    fit_method,
+    link_bounded_linear_4p,
+    link_erf_6p,
+    link_identity,
+    link_sigmoid_2p,
+    link_sigmoid_4p,
+    link_sigmoid_5p,
+    link_tanh_4p,
+    plot_combined,
+    plot_per_method,
+    summary_dataframe,
+)
+
 __all__ = [
     "read_library_csv",
     "add_position_columns",
@@ -79,4 +98,20 @@ __all__ = [
     "make_tilde_to_original_one_site",
     "original_coefficient_orders",
     "tilde_coefficient_orders",
+    "LINK_SPECS",
+    "FitResult",
+    "LinkSpec",
+    "best_method",
+    "fit_all_methods",
+    "fit_method",
+    "link_bounded_linear_4p",
+    "link_erf_6p",
+    "link_identity",
+    "link_sigmoid_2p",
+    "link_sigmoid_4p",
+    "link_sigmoid_5p",
+    "link_tanh_4p",
+    "plot_combined",
+    "plot_per_method",
+    "summary_dataframe",
 ]

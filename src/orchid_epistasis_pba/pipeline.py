@@ -51,7 +51,7 @@ def run_epistasis_pipeline(cfg: EpistasisRunConfig) -> dict[str, Path]:
     dfs = [E0_df]
     for e in range(1, cfg.max_order + 1):
         dfs.append(
-            epistasis_code(k=cfg.k, n=cfg.n, e=e, df=df, pheno=pheno, alphabet=alphabet)
+            epistasis_code(k=k, n=cfg.n, e=e, df=df, pheno=pheno, alphabet=alphabet)
         )
     En_df = pd.concat(dfs, ignore_index=True)
 
