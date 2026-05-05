@@ -40,6 +40,7 @@ dependencies = [
 orchid-epistasis-pba = "orchid_epistasis_pba.cli:main"
 orchid-epistasis-regression-benchmark = "orchid_epistasis_pba.cli_regression:main_regression_benchmark"
 wh-extension-regression = "orchid_epistasis_pba.cli_regression:main_wh_extension_regression"
+orchid-regression-general = "orchid_epistasis_pba.cli_general_regression:main"
 
 [tool.setuptools]
 package-dir = {"" = "src"}

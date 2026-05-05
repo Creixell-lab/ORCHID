@@ -30,6 +30,22 @@ from .regression import (
     run_benchmark,
 )
 
+from .cli_general_regression import (
+    OrderFitResult,
+    build_design_for_order,
+    encode_variants,
+    extract_unscaled_coefficients,
+    fit_one_order,
+    genotype_row_indices,
+    kron_power,
+    make_orchid_raw_H,
+    make_original_orchid_G_one_site,
+    make_orthonormal_G_one_site,
+    make_tilde_to_original_one_site,
+    original_coefficient_orders,
+    tilde_coefficient_orders,
+)
+
 __all__ = [
     "read_library_csv",
     "add_position_columns",
@@ -50,4 +66,17 @@ __all__ = [
     "map_to_design",
     "run_benchmark",
     "plot_benchmark",
+    "OrderFitResult",
+    "build_design_for_order",
+    "encode_variants",
+    "extract_unscaled_coefficients",
+    "fit_one_order",
+    "genotype_row_indices",
+    "kron_power",
+    "make_orchid_raw_H",
+    "make_original_orchid_G_one_site",
+    "make_orthonormal_G_one_site",
+    "make_tilde_to_original_one_site",
+    "original_coefficient_orders",
+    "tilde_coefficient_orders",
 ]
