@@ -169,3 +169,60 @@ Each command writes three artefacts to its output directory:
 
 Expect the benchmark to take on the order of an hour per command on a typical
 laptop with all cores in use; CPU is the bottleneck.
+
+## General QR-derived regression: `orchid-regression-general`
+
+For arbitrary `n` (positions) and `K` (alphabet size), `orchid-regression-general`
+runs a fully general ORCHID/Helmert-style ElasticNet regression. Unlike the
+two fixed benchmarks above, it accepts your own `--input` CSV, `--variant-col`,
+`--phenotype-col`, `--n`, `--k` and `--max-order`, and:
+
+1. Builds the redundant one-site interpretable matrix `H_redundant` and its
+   reduced square form `H'`.
+2. Runs **QR decomposition** on `H'` (with a deterministic sign convention)
+   to obtain the orthonormal basis `Phi`, the coefficient-extraction matrix
+   `G_tilde = Phi / K`, and the inverse/design matrix `V = G_tilde⁻¹`.
+3. Lifts to `n` sites via Kronecker power: `V_full = V^⊗n`,
+   `T_full = T^⊗n` where `T = G_original · V` maps the QR-derived `ε̃`
+   coefficients to the redundant ORCHID-style `ε` coefficients.
+4. Fits a nested-CV ElasticNet model **per epistasis order**, **un-scales**
+   the StandardScaler-transformed coefficients, and writes both `ε̃` and
+   `ε_original_redundant` to disk along with predictions and R² values.
+
+```bash
+orchid-regression-general \
+  --input "example_files/210825_PIN1_36_library.csv" \
+  --outdir "./orchid_general_output" \
+  --variant-col pep_encoded \
+  --phenotype-col PD_input_mean \
+  --n 6 --k 3 --max-order 3 \
+  --orders 1,2,3 \
+  --alphabet a,b,c \
+  --cv-folds 5 --cv-repeats 5 \
+  -j 4
+```
+
+The output directory contains:
+
+| File | Contents |
+|---|---|
+| `predictions_by_order.csv` | In-sample (`pred_order_e`) and out-of-fold (`cv_pred_order_e`) predictions for every fitted order |
+| `epsilon_tilde_by_order.csv` | Coefficients in the QR-derived ORCHID basis, per order |
+| `epsilon_original_redundant_by_order.csv` | Intuitive redundant ORCHID-style coefficients (`T_order @ β̃`), per order |
+| `r2_by_order.csv` | Per-order summary R² (CV mean ± std, OOF, and full-fit) |
+| `cv_folds_by_order.csv` | Every individual outer-fold result, with the chosen `alpha`/`l1_ratio` |
+| `G_one_site_*.csv`, `V_one_site_*.csv`, `Phi_one_site_*.csv`, `H_one_site_*.csv`, `T_one_site_*.csv` | Basis-construction diagnostics for inspection |
+
+`-j` / `--n-jobs` parallelises across epistasis orders. As with the two
+benchmark commands above, `-n` is **not** the cores flag — `--n` already
+means number of sequence positions in this CLI.
+
+> **Memory note.** This is a full Kronecker construction: `V_full` has shape
+> `K^n × K^n`, so the actual memory cost scales as `K^(2n)` float64 entries.
+> It is well suited to small / mid-sized CDMS alphabets (typical PIN1-style
+> libraries with `K = 3`, `K = 4`, and any reasonable `K ≤ 20` at short `n`).
+> A soft cap is provided via `--max-genotype-space` (default `20**6 =
+> 64_000_000`); raise it explicitly for a bigger run. Above that scale NumPy
+> will simply raise `MemoryError` at allocation time. For genuinely large
+> alphabets prefer `orchid-epistasis-pba` (the WH-PBA pipeline), which
+> scales much better.
