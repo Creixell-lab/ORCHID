@@ -226,3 +226,58 @@ means number of sequence positions in this CLI.
 > will simply raise `MemoryError` at allocation time. For genuinely large
 > alphabets prefer `orchid-epistasis-pba` (the WH-PBA pipeline), which
 > scales much better.
+
+## Phenotype linearisation: `orchid-linearise`
+
+Saturating dynamic range and other forms of nonspecific epistasis often
+distort the relationship between the underlying genetic-score and the
+measured phenotype, exactly as discussed in
+[Park, Metzger & Thornton 2024](https://www.nature.com/articles/s41467-024-51895-5).
+`orchid-linearise` fits a small **catalog of nonlinear link functions**
+`y = f(x; θ)` between an observed phenotype `y` and a first-order ORCHID
+prediction `x`, ranks them by R² / AIC / BIC, and tells you which one
+best explains the residual nonlinearity.
+
+| Method | Formula | # params | Notes |
+|---|---|---|---|
+| `identity` | `y = a·x + b` | 2 | Baseline. If this wins, your data is already linear. |
+| `sigmoid_2p` | `y = L + (U − L)/(1 + e^(−x))` | 2 | Raw Metzger sigmoid; assumes `x` is already centred at half-occupancy. |
+| `sigmoid_4p` | `y = L + (U − L)/(1 + e^(−k(x−x₀)))` | 4 | 4PL — the workhorse generalisation of the Metzger sigmoid. |
+| `sigmoid_5p` (Richards) | `y = L + (U − L)/(1 + e^(−k(x−x₀)))^m` | 5 | Asymmetric 5PL. |
+| `tanh_4p` | `y = a·tanh(k(x − x₀)) + b` | 4 | Reparametrised sigmoid; sometimes more numerically stable. |
+| `erf_6p` | `(a·x+b) + (c·x+d) − ((a·x+b)−(c·x+d))·erf((x−e)·f)` | 6 | The dual-affine erf blend used in the original ORCHID paper. |
+| `bounded_linear_4p` | `softclip(a·x + b, L, U)` | 4 | The simplest "phenotype-bounding" model with a smooth knee. |
+
+You either pass a column that already contains a first-order prediction:
+
+```bash
+orchid-linearise \
+  --input "example_files/210825_PIN1_36_library.csv" \
+  --outdir "./linearise_output" \
+  --observed-col PD_input_mean \
+  --predicted-col my_first_order_prediction
+```
+
+…or omit `--predicted-col` and let `orchid-linearise` run the existing
+ORCHID first-order pipeline on the input for you:
+
+```bash
+orchid-linearise \
+  --input "example_files/210825_PIN1_36_library.csv" \
+  --outdir "./linearise_output" \
+  --observed-col PD_input_mean \
+  --variant-col pep_encoded \
+  --n 6 \
+  --alphabet a,b,c
+```
+
+Outputs in the `--outdir`:
+
+- `summary.csv` — every method ranked by R² with R², Pearson r², AIC, BIC, parameters, and status
+- `transformed_predictions.csv` — observed and per-method `f(x; θ)` for every row
+- `best_method.txt` — the winner under your chosen `--criterion` (`r2` / `aic` / `bic`)
+- `fit_comparison.png` — combined plot overlaying every fitted curve on the data scatter
+- `plots/fit_<method>.png` — a focused scatter+fit plot for each method
+
+A `--methods method1,method2,...` flag lets you restrict the fit to a
+subset (useful in CI), and `--no-plots` skips the PNG outputs.
