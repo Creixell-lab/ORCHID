@@ -9,10 +9,12 @@ Two scripts are exposed in ``pyproject.toml``:
 * ``wh-extension-regression``                -> :func:`main_wh_extension_regression`
   uses :data:`regression.V1_INV`
 
-Both commands accept a single optional flag, ``-n/--n-jobs``, to control the
+Both commands accept a single optional flag, ``-j/--n-jobs``, to control the
 size of the joblib worker pool (default: ``-1``, i.e. all available cores).
-Output (``results.csv``, ``raw_folds.csv``, ``r2_vs_fraction.png``) is written
-into a named subdirectory of the current working directory.
+``-j`` was chosen over ``-n`` to avoid clashing with ``orchid-epistasis-pba``'s
+``-n`` flag (number of sequence positions). Output (``results.csv``,
+``raw_folds.csv``, ``r2_vs_fraction.png``) is written into a named
+subdirectory of the current working directory.
 """
 
 from __future__ import annotations
@@ -47,7 +49,7 @@ def _build_parser(prog: str, basis_label: str) -> argparse.ArgumentParser:
         ),
     )
     p.add_argument(
-        "-n",
+        "-j",
         "--n-jobs",
         type=int,
         default=-1,
@@ -55,7 +57,9 @@ def _build_parser(prog: str, basis_label: str) -> argparse.ArgumentParser:
         help=(
             "Number of parallel worker processes for joblib. Default -1 "
             "uses every available CPU core. Pass a positive integer to "
-            "cap the pool (e.g. `-n 4` to leave headroom on a laptop)."
+            "cap the pool (e.g. `-j 4` to leave headroom on a laptop). "
+            "`-j` is used instead of `-n` to avoid confusion with "
+            "`orchid-epistasis-pba --n` (number of sequence positions)."
         ),
     )
     return p
