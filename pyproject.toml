@@ -29,7 +29,8 @@ dependencies = [
     "biopython>=1.80",
     "logomaker>=0.8",
     "matplotlib>=3.5.0",
-    "tqdm>=4.60.0"
+    "tqdm>=4.60.0",
+    "joblib>=1.0.0"
 ]
 
 [project.urls]
@@ -37,9 +38,14 @@ dependencies = [
 
 [project.scripts]
 orchid-epistasis-pba = "orchid_epistasis_pba.cli:main"
+orchid-epistasis-regression-benchmark = "orchid_epistasis_pba.cli_regression:main_regression_benchmark"
+wh-extension-regression = "orchid_epistasis_pba.cli_regression:main_wh_extension_regression"
 
 [tool.setuptools]
 package-dir = {"" = "src"}
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.setuptools.package-data]
+orchid_epistasis_pba = ["data/*.csv"]

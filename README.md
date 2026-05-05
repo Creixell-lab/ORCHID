@@ -123,3 +123,46 @@ The script generates two files in the specified output directory:
  1.  Incoporate data linearisation from the .ipynb into the python script, `orchid-epistasis-pba` assumes data is linearised already
  2.  `orchid-epistasis-pba` relies on Partial Background Averaging (PBA) based on the WH transform; an alternate script that uses ridge regression with automatic alpha optimisation is planned
  3.  output should generate more data visualisations, images and r2 values seen in the .ipynb
+
+## Regression-based comparison benchmarks
+
+Two additional commands are bundled to compare the WH-based PBA pipeline against
+ElasticNet polynomial regression on the same 6-position, k=3 PIN1 example
+library. Inputs (the bundled `210825_PIN1_36_library.csv`), the alphabet,
+phenotype column and hyperparameter grids are all fixed — these commands are
+reproducible reference benchmarks rather than general-purpose tools.
+
+Both commands run the same nested cross-validated ElasticNet pipeline
+(20 random repeats × 5-fold outer / 5-fold inner CV across 12 training-set
+truncation levels from 10 % → 100 %), parallelised across all available CPU
+cores via `joblib`. They differ only in the basis matrix used to encode the
+genotype:
+
+| Command | Basis | Description |
+|---|---|---|
+| `orchid-epistasis-regression-benchmark` | `V_PHYS` | Physics-correct equilateral simplex contrast matrix (centred, equal pairwise distances, unit-variance columns). |
+| `wh-extension-regression`               | `V1_INV` | Direct Fauré marginal contrast matrix — the Walsh–Hadamard extension to k=3 used elsewhere in ORCHID. |
+
+Run either of them from any directory after installing the package:
+
+```bash
+orchid-epistasis-regression-benchmark      # writes ./orchid_epistasis_regression_benchmark_output/
+wh-extension-regression                    # writes ./wh_extension_regression_output/
+```
+
+Both commands accept a single optional flag `-n` / `--n-jobs` to cap the
+joblib worker pool (default `-1` = all CPU cores). Useful when you want to
+leave headroom on a laptop:
+
+```bash
+orchid-epistasis-regression-benchmark -n 4   # use 4 CPU cores instead of all
+```
+
+Each command writes three artefacts to its output directory:
+
+1.  `results.csv` — summary table with columns `Frac, N, mean_R2, std_R2, n_folds`
+2.  `raw_folds.csv` — every (truncation, seed, fold) row, for downstream plotting
+3.  `r2_vs_fraction.png` — R² vs training fraction with error bars
+
+Expect the benchmark to take on the order of an hour per command on a typical
+laptop with all cores in use; CPU is the bottleneck.
