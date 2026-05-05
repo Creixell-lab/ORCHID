@@ -150,13 +150,16 @@ orchid-epistasis-regression-benchmark      # writes ./orchid_epistasis_regressio
 wh-extension-regression                    # writes ./wh_extension_regression_output/
 ```
 
-Both commands accept a single optional flag `-n` / `--n-jobs` to cap the
+Both commands accept a single optional flag `-j` / `--n-jobs` to cap the
 joblib worker pool (default `-1` = all CPU cores). Useful when you want to
 leave headroom on a laptop:
 
 ```bash
-orchid-epistasis-regression-benchmark -n 4   # use 4 CPU cores instead of all
+orchid-epistasis-regression-benchmark -j 4   # use 4 CPU cores instead of all
 ```
+
+Note: `-j` (rather than `-n`) is used here so it does not collide with
+`orchid-epistasis-pba --n`, which means "number of sequence positions".
 
 Each command writes three artefacts to its output directory:
 
