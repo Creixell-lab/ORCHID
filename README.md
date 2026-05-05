@@ -4,7 +4,7 @@
 
 # ORCHID: ORigin-independent and Context-exHaustIve analysis of CDMS libraries
 
-This is the official repository of ORCHID for the paper:
+This is the official repository of ORCHID for the following paper:
 Identifying Protein Superbinders and Molecular Determinants of Epistasis with Combinatorial Deep Mutational Scanning (CDMS) Libraries
 
 Mingxuan Jiang<sup>1</sup>, Mohan Sun<sup>1</sup>, Nuo Cheng<sup>1</sup>, Mihkel Örd<sup>1</sup>, Teresa L. Augustin<sup>1</sup>,  
