@@ -42,6 +42,7 @@ orchid-epistasis-regression-benchmark = "orchid_epistasis_pba.cli_regression:mai
 wh-extension-regression = "orchid_epistasis_pba.cli_regression:main_wh_extension_regression"
 orchid-regression-general = "orchid_epistasis_pba.cli_general_regression:main"
 orchid-linearise = "orchid_epistasis_pba.cli_linearisation:main"
+orchid-wt-epistasis = "orchid_epistasis_pba.cli_wt_epistasis:main"
 
 [tool.setuptools]
 package-dir = {"" = "src"}

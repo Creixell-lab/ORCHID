@@ -65,6 +65,14 @@ from .linearisation import (
     summary_dataframe,
 )
 
+from .wt_epistasis import (
+    WTEpistasisResult,
+    compute_pairwise_wt_epistasis,
+    compute_triplet_wt_epistasis,
+    compute_wt_epistasis,
+    find_differing_positions,
+)
+
 __all__ = [
     "read_library_csv",
     "add_position_columns",
@@ -114,4 +122,9 @@ __all__ = [
     "plot_combined",
     "plot_per_method",
     "summary_dataframe",
+    "WTEpistasisResult",
+    "compute_pairwise_wt_epistasis",
+    "compute_triplet_wt_epistasis",
+    "compute_wt_epistasis",
+    "find_differing_positions",
 ]

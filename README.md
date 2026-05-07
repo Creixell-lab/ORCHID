@@ -281,3 +281,58 @@ Outputs in the `--outdir`:
 
 A `--methods method1,method2,...` flag lets you restrict the fit to a
 subset (useful in CI), and `--no-plots` skips the PNG outputs.
+
+## WT-dependent (variant-specific) epistasis: `orchid-wt-epistasis`
+
+The other ORCHID commands compute *reference-free* / ensemble-averaged
+epistasis. Sometimes you want the opposite: the **classical, variant-specific,
+WT-dependent (reference-based)** epistasis between a particular reference
+sequence and a particular destination, computed by the standard finite-
+difference / inclusion–exclusion sum over the 2ⁿ corners of the n-dimensional
+hypercube spanned by the differing sites.
+
+For Hamming distance `n = 2` (the "epistasis square"):
+
+```
+ε⁽²⁾ = y(AB) − y(A) − y(B) + y(WT)
+```
+
+For Hamming distance `n = 3` (the "epistasis cube"):
+
+```
+ε⁽³⁾ = y(ABC) − (y(AB) + y(AC) + y(BC)) + (y(A) + y(B) + y(C)) − y(WT)
+```
+
+Higher orders are supported automatically as long as all 2ⁿ intermediate
+variants exist in the dataset.
+
+```bash
+orchid-wt-epistasis \
+  --input "example_files/210825_PIN1_36_library.csv" \
+  --variant-col pep_encoded \
+  --phenotype-col PD_input_mean \
+  --reference   aaaaaa \
+  --destination bbaaaa \
+  --out ./pairwise_breakdown.csv
+```
+
+Output is a printed summary and an optional CSV breakdown listing every
+intermediate variant, its inclusion–exclusion sign and contribution.
+
+You can also call it from Python:
+
+```python
+from orchid_epistasis_pba import compute_wt_epistasis
+import pandas as pd
+
+df = pd.read_csv("example_files/210825_PIN1_36_library.csv")
+result = compute_wt_epistasis(
+    df,
+    variant_col="pep_encoded",
+    phenotype_col="PD_input_mean",
+    reference="aaaaaa",
+    destination="bbcaaa",          # Hamming distance 3 -> epistasis cube
+)
+print(result.epistasis)            # the order-3 term
+result.breakdown_dataframe()       # one row per corner of the cube
+```
