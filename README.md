@@ -117,13 +117,6 @@ The script generates two files in the specified output directory:
 1.  `predicted.csv`: Contains the predicted phenotypes calculated by adding epistatic terms from the 1st order up to the specified `max-order`.
 2.  `epistasis_terms.csv`: Contains the calculated coefficients (weights) for the epistatic terms used in the model.
 
-
-### Future Updates
-
- 1.  Incoporate data linearisation from the .ipynb into the python script, `orchid-epistasis-pba` assumes data is linearised already
- 2.  `orchid-epistasis-pba` relies on Partial Background Averaging (PBA) based on the WH transform; an alternate script that uses ridge regression with automatic alpha optimisation is planned
- 3.  output should generate more data visualisations, images and r2 values seen in the .ipynb
-
 ## Regression-based comparison benchmarks
 
 Two additional commands are bundled to compare the WH-based PBA pipeline against
