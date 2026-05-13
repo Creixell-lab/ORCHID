@@ -127,7 +127,7 @@ reproducible reference benchmarks rather than general-purpose tools.
 
 Both commands run the same nested cross-validated ElasticNet pipeline
 (20 random repeats × 5-fold outer / 5-fold inner CV across 12 training-set
-truncation levels from 10 % → 100 %), parallelised across all available CPU
+truncation levels from 20 % → 100 %), parallelised across all available CPU
 cores via `joblib`. They differ only in the basis matrix used to encode the
 genotype:
 
