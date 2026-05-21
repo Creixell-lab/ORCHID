@@ -282,7 +282,7 @@ epistasis. Sometimes you want the opposite: the **classical, variant-specific,
 WT-dependent (reference-based)** epistasis between a particular reference
 sequence and a particular destination, computed by the standard finite-
 difference / inclusion–exclusion sum over the 2ⁿ corners of the n-dimensional
-hypercube spanned by the differing sites.
+hypercube spanned by the differing sites. This will reveal the idiosyncratic epistasis present.
 
 For Hamming distance `n = 2` (the "epistasis square"):
 
