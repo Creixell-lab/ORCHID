@@ -133,7 +133,7 @@ genotype:
 
 | Command | Basis | Description |
 |---|---|---|
-| `orchid-epistasis-regression-benchmark` | `V_PHYS` | Physics-correct equilateral simplex contrast matrix (centred, equal pairwise distances, unit-variance columns). |
+| `orchid-epistasis-regression-benchmark` | `V_PHYS` | Helmert-style construction, from orthonormalisation of the WT-independent Walsh-Hadamard matrix. |
 | `wh-extension-regression`               | `V1_INV` | Direct Fauré marginal contrast matrix — the Walsh–Hadamard extension to k=3 used elsewhere in ORCHID. |
 
 Run either of them from any directory after installing the package:
