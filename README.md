@@ -2,7 +2,7 @@
   <img src="orchid_1280x640.png" alt="ORCHID cover art" width="100%">
 </p>
 
-# ORCHID: ORigin-independent and Context-exHaustIve analysis of CDMS libraries
+# ORCHID: ORigin-independent and Context-exhaustive High-throughput Integration of combinatorial DMS libraries
 
 This is the official repository of ORCHID for the following paper:
 Protein Superbinders and Molecular Determinants of Epistasis Identified by Combinatorial Deep Mutational Scanning
